@@ -14,7 +14,7 @@ pipeline {
         stage('Build') {
             steps {
                     // Get some code from a GitHub repository
-                    git branch: "${params.BRANCH}", url: 'https://github.com/testershmester/SauceDemoQA19.git'
+                    git branch: "${params.BRANCH}", url: ''https://github.com/testershmester/SauceDemoDocker.git'
 
                     bat 'docker compose up -d'
             }
