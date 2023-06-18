@@ -42,4 +42,4 @@ services:
     depends_on:
       - selenoid
     network_mode: host
-    command: [ "mvn clean test" ]
+    command: mvn clean test
