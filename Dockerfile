@@ -8,5 +8,3 @@ COPY pom.xml .
 COPY src ./src
 # Download the project dependencies specified in the pom.xml
 RUN mvn dependency:go-offline -B
-#RUN tests
-RUN mvn clean compile
