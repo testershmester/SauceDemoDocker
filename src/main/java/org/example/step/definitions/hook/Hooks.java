@@ -18,19 +18,18 @@ public class Hooks {
     public void setUpBrowser(Scenario scenario) {
         browser = CHROME;
         ChromeOptions options = new ChromeOptions();
-//        options.setCapability("browserVersion", "113.0");
-//        options.setCapability("selenoid:options", new HashMap<String, Object>() {{
-//            /* How to add test badge */
-//            put("name", scenario.getName());
-//            /* How to set session timeout */
-//            put("enableVideo", true);
-//            put("enableVNC", true);
-//            put("videoName", scenario.getName());
-//        }});
-//        browserCapabilities = options;
-//        browserVersion = "113.0";
-//        browserSize = "1920x1080";
-//
+        options.setCapability("browserVersion", "113.0");
+        options.setCapability("selenoid:options", new HashMap<String, Object>() {{
+            /* How to add test badge */
+            put("name", scenario.getName());
+            /* How to set session timeout */
+            put("enableVideo", true);
+            put("enableVNC", true);
+            put("videoName", scenario.getName());
+        }});
+        browserCapabilities = options;
+        browserVersion = "113.0";
+        browserSize = "1920x1080";
     }
 
     @After
