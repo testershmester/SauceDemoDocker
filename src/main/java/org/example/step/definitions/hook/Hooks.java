@@ -3,6 +3,7 @@ package org.example.step.definitions.hook;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.HashMap;
@@ -23,7 +24,7 @@ public class Hooks {
         options.setCapability("browserVersion", "113.0");
         options.setCapability("selenoid:options", new HashMap<String, Object>() {{
             /* How to add test badge */
-            put("name", scenario.getName());
+            put("name", StringUtils.toRootLowerCase(scenario.getName()).replace(" ", "_"));
             /* How to set session timeout */
             put("enableVideo", true);
             put("enableVNC", true);
