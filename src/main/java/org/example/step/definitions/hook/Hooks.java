@@ -23,12 +23,8 @@ public class Hooks {
         ChromeOptions options = new ChromeOptions();
         options.setCapability("browserVersion", "113.0");
         options.setCapability("selenoid:options", new HashMap<String, Object>() {{
-            /* How to add test badge */
-            put("name", StringUtils.toRootLowerCase(scenario.getName()).replace(" ", "_"));
-            /* How to set session timeout */
             put("enableVideo", true);
-            put("enableVNC", true);
-            put("videoName", scenario.getName());
+            put("videoName", StringUtils.toRootLowerCase(scenario.getName()).replace(" ", "_"));
         }});
         browserCapabilities = options;
     }
