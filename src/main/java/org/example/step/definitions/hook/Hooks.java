@@ -14,9 +14,11 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class Hooks {
 
-    @Before("@ui")
+    @Before
     public void setUpBrowser(Scenario scenario) {
         browser = CHROME;
+        browserVersion = "113.0";
+        browserSize = "1920x1080";
         ChromeOptions options = new ChromeOptions();
         options.setCapability("browserVersion", "113.0");
         options.setCapability("selenoid:options", new HashMap<String, Object>() {{
@@ -28,8 +30,6 @@ public class Hooks {
             put("videoName", scenario.getName());
         }});
         browserCapabilities = options;
-        browserVersion = "113.0";
-        browserSize = "1920x1080";
     }
 
     @After
