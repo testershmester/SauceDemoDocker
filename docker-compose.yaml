@@ -18,6 +18,7 @@ services:
       - ".:/etc/selenoid"
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/video:/opt/selenoid/video"
+      - "${HOME}/.m2:/root/.m2"
     environment:
       - OVERRIDE_VIDEO_OUTPUT_DIR=/video
     command: ["-conf", "/etc/selenoid/browsers.json", "-limit", "4", "-video-output-dir", "/opt/selenoid/video"]
