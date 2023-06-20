@@ -1,3 +1,5 @@
+def parameters
+
 pipeline {
     agent any
 
@@ -8,12 +10,24 @@ pipeline {
 
     parameters {
         gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', description: 'Select branch', name: 'BRANCH', type: 'PT_BRANCH'
+        extendedChoice defaultValue: '@ui,@api', description: 'Select test tags to run:', name: 'TAGS', quoteValue: false, type: 'PT_CHECKBOX', value: '@ui,@api', visibleItemCount: 5
     }
 
     stages {
+        stage('Initialize parameters') {
+                    steps {
+                         script {
+                            if ("${params.TAGS}".contains("@ui") && "${params.TAGS}".contains("@api")) {
+                                parameters = "-Dcucumber.filter.tags=@api or @ui"
+                            } else {
+                                parameters = "-Dcucumber.filter.tags=@ui"
+                    }
+                 }
+             }
+        }
+
         stage('Build') {
             steps {
-                    // Get some code from a GitHub repository
                     git branch: "${params.BRANCH}", url: 'https://github.com/testershmester/SauceDemoDocker.git'
                     bat 'docker compose up --build --abort-on-container-exit'
             }

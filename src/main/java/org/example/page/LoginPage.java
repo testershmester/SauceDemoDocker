@@ -37,7 +37,7 @@ public class LoginPage {
 
     public ProductsPage loginAsStandardUser() {
         String userName = "standard_user";
-        String password = "secret_sauce";
+        String password = "secret_sauce  ";
         log.info("Login as standard user: {}, {}", userName, password);
         loginAs(userName, password);
         return new ProductsPage();
