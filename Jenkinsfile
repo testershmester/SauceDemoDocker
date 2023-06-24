@@ -30,18 +30,10 @@ pipeline {
                     bat 'docker compose up --build --abort-on-container-exit'
             }
         }
-//         stage('Reports') {
-//             steps {
-//                 script {
-//                     allure([
-//                         includeProperties: false,
-//                         jdk: '',
-//                         properties: [],
-//                         reportBuildPolicy: 'ALWAYS',
-//                         results: [[path: 'target/allure-results']]
-//                     ])
-//                 }
-//             }
-//         }
     }
+    post {
+            always {
+                cucumber buildStatus: 'UNSTABLE', customCssFiles: '', customJsFiles: '', failedFeaturesNumber: -1, failedScenariosNumber: -1, failedStepsNumber: -1, fileIncludePattern: '**/*.json', jsonReportDirectory: '**/target/test-reports', pendingStepsNumber: -1, reportTitle: 'Test Result Report', skippedStepsNumber: -1, sortingMethod: 'ALPHABETICAL', undefinedStepsNumber: -1
+            }
+        }
 }
