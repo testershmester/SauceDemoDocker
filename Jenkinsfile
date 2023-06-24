@@ -8,24 +8,16 @@ pipeline {
         maven "M3"
     }
 
+    environment {
+        CUCUMBER_OPTIONS = -Dcucumber.filter.tags="@api or @ui"
+    }
+
     parameters {
         gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', description: 'Select branch', name: 'BRANCH', type: 'PT_BRANCH'
         extendedChoice defaultValue: '@ui,@api', description: 'Select test tags to run:', name: 'TAGS', quoteValue: false, type: 'PT_CHECKBOX', value: '@ui,@api', visibleItemCount: 5
     }
 
     stages {
-        stage('Initialize parameters') {
-                    steps {
-                         script {
-                            if ("${params.TAGS}".contains("@ui") && "${params.TAGS}".contains("@api")) {
-                                parameters = "-Dcucumber.filter.tags=@api or @ui"
-                            } else {
-                                parameters = "-Dcucumber.filter.tags=@ui"
-                    }
-                 }
-             }
-        }
-
         stage('Build') {
             steps {
                     git branch: "${params.BRANCH}", url: 'https://github.com/testershmester/SauceDemoDocker.git'
