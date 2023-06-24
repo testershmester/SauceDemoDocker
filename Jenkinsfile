@@ -1,5 +1,3 @@
-def parameters
-
 pipeline {
     agent any
 
@@ -10,13 +8,22 @@ pipeline {
 
     parameters {
         gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', description: 'Select branch', name: 'BRANCH', type: 'PT_BRANCH'
-    }
-
-    environment {
-        CUCUMBER_OPTIONS = "-Dcucumber.filter.tags=\"@api or @ui\""
+        extendedChoice defaultValue: '@ui,@api', description: 'Select test tags to run:', name: 'CUCUMBER_OPTIONS', quoteValue: false, type: 'PT_CHECKBOX', value: '@ui,@api', visibleItemCount: 5
     }
 
     stages {
+        stage('Initialize parameters') {
+                    steps {
+                         script {
+                            if ("${params.CUCUMBER_OPTIONS}".contains("@ui") && "${params.CUCUMBER_OPTIONS}".contains("@api")) {
+                                ${params.CUCUMBER_OPTIONS} = "-Dcucumber.filter.tags=@api or @ui"
+                            } else {
+                                ${params.CUCUMBER_OPTIONS} = "-Dcucumber.filter.tags=@ui"
+                    }
+                 }
+             }
+        }
+
         stage('Build') {
             steps {
                     git branch: "${params.BRANCH}", url: 'https://github.com/testershmester/SauceDemoDocker.git'
