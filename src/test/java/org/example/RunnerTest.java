@@ -8,7 +8,7 @@ import org.testng.annotations.DataProvider;
         features = "src/test/resources/features",
         glue = "org.example.step.definitions",
         tags = "",
-        plugin = {"pretty", "html:target/test-reports/cucumber", "json:target/test-reports/cucumber.json"})
+        plugin = {"pretty", "html:test-reports/cucumber", "json:test-reports/cucumber.json"})
 public class RunnerTest extends AbstractTestNGCucumberTests {
     @DataProvider(parallel = true)
     @Override
