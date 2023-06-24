@@ -7,8 +7,8 @@ pipeline {
     }
 
     parameters {
-        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', description: 'Select branch', name: 'BRANCH', type: 'PT_BRANCH'
-        extendedChoice defaultValue: '@ui,@api', description: 'Select test tags to run', name: 'TAGS', type: 'PT_MULTI_SELECT', value: '@ui,@api'
+        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', description: 'Select branch', name: 'branch', type: 'PT_BRANCH'
+        extendedChoice defaultValue: '@ui,@api', description: 'Select test tags to run', name: 'TAGS', type: 'PT_CHECKBOX', value: '@ui,@api'
     }
 
     stages {
@@ -16,9 +16,9 @@ pipeline {
                     steps {
                          script {
                             if ("${params.TAGS}".contains("@ui") && "${params.TAGS}".contains("@api")) {
-                                env.CUCUMBER_OPTIONS = "-Dcucumber.filter.tags=@api or @ui"
+                                params.CUCUMBER_OPTIONS = "-Dcucumber.filter.tags=@api or @ui"
                             } else {
-                                env.CUCUMBER_OPTIONS = "-Dcucumber.filter.tags=@ui"
+                                params.CUCUMBER_OPTIONS = "-Dcucumber.filter.tags=@ui"
                     }
                  }
              }
@@ -26,7 +26,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                    git branch: 'master', url: 'https://github.com/testershmester/SauceDemoDocker.git'
+                    git branch: "${params.branch}", url: 'https://github.com/testershmester/SauceDemoDocker.git'
                     bat 'docker compose up --build --abort-on-container-exit'
             }
         }
