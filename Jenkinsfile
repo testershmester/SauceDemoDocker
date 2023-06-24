@@ -26,7 +26,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                    git branch: "${params.BRANCH}", url: 'https://github.com/testershmester/SauceDemoDocker.git'
+                    git branch: 'master', url: 'https://github.com/testershmester/SauceDemoDocker.git'
                     bat 'docker compose up --build --abort-on-container-exit'
             }
         }
