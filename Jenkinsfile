@@ -8,12 +8,12 @@ pipeline {
         maven "M3"
     }
 
-    environment {
-        CUCUMBER_OPTIONS = "-Dcucumber.filter.tags=\"@api or @ui\""
-    }
-
     parameters {
         gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', description: 'Select branch', name: 'BRANCH', type: 'PT_BRANCH'
+    }
+
+    environment {
+        CUCUMBER_OPTIONS = "-Dcucumber.filter.tags=\"@api or @ui\""
     }
 
     stages {
