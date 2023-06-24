@@ -9,7 +9,7 @@ pipeline {
     }
 
     environment {
-        CUCUMBER_OPTIONS = -Dcucumber.filter.tags=\"@api or @ui\"
+        CUCUMBER_OPTIONS = "-Dcucumber.filter.tags=\"@api or @ui\""
     }
 
     parameters {
