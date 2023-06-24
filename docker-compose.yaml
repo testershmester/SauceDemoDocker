@@ -29,4 +29,4 @@ services:
     depends_on:
       - selenoid
     network_mode: host
-    command: mvn clean test ${CUCUMBER_OPTIONS}
+    command: mvn clean test "${CUCUMBER_OPTIONS}"

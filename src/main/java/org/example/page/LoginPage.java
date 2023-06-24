@@ -2,6 +2,7 @@ package org.example.page;
 
 
 import com.codeborne.selenide.Selenide;
+import io.cucumber.java.ja.但し;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.util.PropertiesLoader;
@@ -37,7 +38,7 @@ public class LoginPage {
 
     public ProductsPage loginAsStandardUser() {
         String userName = "standard_user";
-        String password = "secret_sauce  ";
+        String password = "secret_sauce";
         log.info("Login as standard user: {}, {}", userName, password);
         loginAs(userName, password);
         return new ProductsPage();
