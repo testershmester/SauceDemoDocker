@@ -20,12 +20,14 @@ services:
       - "/video:/opt/selenoid/video"
     environment:
       - OVERRIDE_VIDEO_OUTPUT_DIR=/video
-    command: ["-conf", "/etc/selenoid/browsers.json", "-limit", "4", "-video-output-dir", "/opt/selenoid/video"]
+    command: [ "-conf", "/etc/selenoid/browsers.json", "-limit", "4", "-video-output-dir", "/opt/selenoid/video" ]
 
   maven:
     build:
       context: .
       dockerfile: Dockerfile
+    volumes:
+        - "./target:/tests/target"
     depends_on:
       - selenoid
     network_mode: host
