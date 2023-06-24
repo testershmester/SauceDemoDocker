@@ -27,7 +27,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-        - "./target:/tests/target"
+        - "./reports:/tests/target"
     depends_on:
       - selenoid
     network_mode: host
