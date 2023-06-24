@@ -14,7 +14,6 @@ pipeline {
 
     parameters {
         gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', description: 'Select branch', name: 'BRANCH', type: 'PT_BRANCH'
-        extendedChoice defaultValue: '@ui,@api', description: 'Select test tags to run:', name: 'TAGS', quoteValue: false, type: 'PT_CHECKBOX', value: '@ui,@api', visibleItemCount: 5
     }
 
     stages {
