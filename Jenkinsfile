@@ -8,7 +8,11 @@ pipeline {
 
     parameters {
         gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', description: 'Select branch', name: 'BRANCH', type: 'PT_BRANCH'
-          extendedChoice defaultValue: '@ui or @api', description: 'Select test tags to run', multiSelectDelimiter: ' or ', name: 'CUCUMBER_OPTIONS', quoteValue: false, saveJSONParameterToFile: false, type: 'PT_MULTI_SELECT', value: '@ui or @api', visibleItemCount: 5
+        extendedChoice defaultValue: '@ui or @api', multiSelectDelimiter: ' or ', name: '', quoteValue: false, saveJSONParameterToFile: false, type: 'PT_CHECKBOX', value: '@ui or @api', visibleItemCount: 5
+    }
+
+    environment {
+        CUCUMBER_OPTIONS = "-Dcucumber.filter.tags=${params.TAGS}"
     }
 
     stages {
