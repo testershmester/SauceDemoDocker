@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.example.page.LoginPage;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.io.IOException;
+import java.util.HashMap;
 
 import static com.codeborne.selenide.Browsers.CHROME;
 import static com.codeborne.selenide.Configuration.*;
@@ -24,15 +24,23 @@ public class Hooks {
     public void setUpBrowser(Scenario scenario) {
         log.info("Before hook");
         browser = CHROME;
-        browserVersion = "113.0";
+        browserVersion = "114.0";
         browserSize = "1920x1080";
         ChromeOptions options = new ChromeOptions();
-        options.setCapability("browserVersion", "113.0");
+        options.setCapability("browserVersion", "114.0");
+        options.addArguments("--disable-site-isolation-trials"); //to get access to the new opened tabs in tests
+        options.addArguments("--disable-notifications");
+        options.setCapability("selenoid:options", new HashMap<String, Object>() {
+            {
+                put("enableVideo", true);
+                put("enableVNC", true);
+            }
+        });
         browserCapabilities = options;
     }
 
     @After
-    public void tearDown(Scenario scenario) throws IOException {
+    public void tearDown(Scenario scenario) {
         clearBrowserCookies();
         closeWebDriver();
     }

@@ -5,8 +5,11 @@ services:
     image: selenoid/video-recorder:latest-release
     network_mode: bridge
 
-  chrome_113:
-    image: selenoid/chrome:113.0
+  chrome_114:
+    image: selenoid/vnc_chrome:114.0
+
+  firefox_114:
+    image: selenoid/vnc_firefox:115.0
 
   selenoid:
     image: aerokube/selenoid:latest-release
@@ -21,6 +24,18 @@ services:
     environment:
       - OVERRIDE_VIDEO_OUTPUT_DIR=/video
     command: [ "-conf", "/etc/selenoid/browsers.json", "-limit", "4", "-video-output-dir", "/opt/selenoid/video" ]
+
+  selenoid-ui:
+    image: aerokube/selenoid-ui:latest-release
+    container_name: selenoid-ui
+    network_mode: bridge
+    ports:
+      - "8080:8080"
+    links:
+      - selenoid
+    depends_on:
+      - selenoid
+    command: [ "--selenoid-uri", "http://selenoid:4444" ]
 
   maven:
     build:
