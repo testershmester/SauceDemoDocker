@@ -20,7 +20,7 @@
       "115.0": {
         "image": "selenoid/vnc_firefox:115.0",
         "port": "4444",
-        "path": "/"
+        "path": "/wd/hub"
       }
     }
   }
