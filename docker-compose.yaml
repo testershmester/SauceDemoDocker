@@ -8,6 +8,9 @@ services:
   chrome_114:
     image: selenoid/vnc_chrome:114.0
 
+  chrome_113:
+    image: selenoid/chrome:113.0
+
   firefox_114:
     image: selenoid/vnc_firefox:115.0
 

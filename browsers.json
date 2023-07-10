@@ -6,6 +6,11 @@
         "image": "selenoid/vnc_chrome:114.0",
         "port": "4444",
         "path": "/"
+      },
+      "113.0": {
+        "image": "selenoid/chrome:113.0",
+        "port": "4444",
+        "path": "/"
       }
     }
   },
